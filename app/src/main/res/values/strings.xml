@@ -2,4 +2,33 @@
     <string name="app_name">NavigationDrawer</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
+    <string-array name="font_sizes">
+        <item>12sp</item>
+        <item>15sp</item>
+        <item>18sp</item>
+        <item>21sp</item>
+        <item>24sp</item>
+        <item>27sp</item>
+    </string-array>
+    <string-array name="font_size_values">
+        <item>12</item>
+        <item>15</item>
+        <item>18</item>
+        <item>21</item>
+        <item>24</item>
+        <item>27</item>
+    </string-array>
+    <string-array name="font_colours">
+        <item>Black</item>
+        <item>Red</item>
+        <item>Green</item>
+        <item>Blue</item>
+    </string-array>
+    <string-array name="font_colour_values">
+        <item>#FF000000</item>
+        <item>#FFFF4444</item>
+        <item>#FF99CC00</item>
+        <item>#FF33B5E5</item>
+    </string-array>
+
 </resources>

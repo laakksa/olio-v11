@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <SwitchPreference
         android:key="switch"
         android:title="Editable"/>
+    <DropDownPreference android:key="fontsize"
+        android:title="Font Size"
+        android:entries="@array/font_sizes"
+        android:entryValues="@array/font_size_values"
+        app:useSimpleSummaryProvider="true"/>
+    <DropDownPreference android:key="font_colour"
+        android:title="Font colour"
+        android:entries="@array/font_colours"
+        android:entryValues="@array/font_colour_values"/>
+   <CheckBoxPreference android:key="bold"
+       android:title="Bold text"
+       android:defaultValue="false"/>
+
 </PreferenceScreen>

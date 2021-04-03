@@ -20,8 +20,6 @@ import com.google.android.material.navigation.NavigationView;
 public class MainActivity extends AppCompatActivity{
     private DrawerLayout drawer;
     private ActionBarDrawerToggle actionBarDrawerToggle;
-    HomeFragment fragmentHome;
-    SettingsFragment fragmentSettings;
     private String text;
     Bundle args;
 
@@ -30,12 +28,12 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        fragmentHome = new HomeFragment();
-        fragmentSettings = new SettingsFragment();
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         drawer = findViewById(R.id.drawer_layout);
+        SharedPreferences prefs = getSharedPreferences("settings", 0);
+        prefs.edit().putString("daatta", "").commit();
         NavigationView navigationView = findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -49,10 +47,14 @@ public class MainActivity extends AppCompatActivity{
                         navigationView.getMenu().getItem(0).setChecked(false);
                         break;
                     case R.id.nav_home:
-                        frag = new HomeFragment();
-                        getSupportFragmentManager().beginTransaction().replace(R.id.nav_content, frag).commit();
-                        item.setChecked(true);
-                        navigationView.getMenu().getItem(1).setChecked(false);
+                        //getSupportFragmentManager().beginTransaction().replace(R.id.nav_content, frag).commit();
+                        //item.setChecked(true);
+                        frag  = getSupportFragmentManager().findFragmentByTag("HomeFragment");
+                        if (frag != null) {
+                            navigationView.getMenu().getItem(1).setChecked(false);
+                            item.setChecked(true);
+                            getSupportFragmentManager().beginTransaction().show(frag).commit();
+                        }
                     default:
                         frag = new HomeFragment();
                         getSupportFragmentManager().beginTransaction().replace(R.id.nav_content, frag).commit();
