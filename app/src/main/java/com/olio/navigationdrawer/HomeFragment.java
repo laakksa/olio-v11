@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.Spanned;
 import android.text.TextWatcher;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -28,17 +30,14 @@ import java.util.concurrent.ExecutionException;
 
 public class HomeFragment extends Fragment {
     EditText edit;
-    String text;
     TextView textView;
     View v;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         v = inflater.inflate(R.layout.fragment_home, container, false);
         edit = v.findViewById(R.id.editText);
-
         return v;
     }
 
@@ -48,18 +47,30 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         edit = v.findViewById(R.id.editText);
         textView = v.findViewById(R.id.textView);
+        //Restore data from saved state
         if (savedInstanceState != null){
-            edit.setText(savedInstanceState.getString("asdasd"));
+            edit.setText(savedInstanceState.getString("savedInstance"));
         }
         SharedPreferences spref = this.getActivity().getSharedPreferences("settings", Context.MODE_PRIVATE);
-        edit.setText(spref.getString("daatta", null));
+
+        //Restore editable text views text when returning to fragment
+        edit.setText(spref.getString("data", null));
+
+        //Set editText uneditable and set readable textView's text when editable switch is false in settings
         if(!spref.getBoolean("switch", true)){
             edit.setFocusableInTouchMode(false);
             edit.setFocusable(false);
             edit.setKeyListener(null);
+            textView.setText(edit.getText());
         }
+
+        //Set toolbar's title from display text setting
+        String displaytext = spref.getString("displaytext", "Display Text");
+        getActivity().setTitle(displaytext);
+
+        //Set textView's text settings with parameters from settings
         textView.setTextSize(Integer.parseInt(spref.getString("fontsize", "12")));
-        System.out.println(spref.getInt("width-seekbar", 12));
+        textView.setGravity(Integer.parseInt(spref.getString("gravity", "3")));
         textView.setTextColor(Color.parseColor(spref.getString("font_colour", "#FF000000")));
         if(spref.getBoolean("bold", false)) {
             textView.setTypeface(null, Typeface.BOLD);
@@ -72,14 +83,16 @@ public class HomeFragment extends Fragment {
         super.onPause();
         SharedPreferences pref = this.getActivity().getSharedPreferences("settings", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
-        editor.putString("daatta", edit.getText().toString()).commit();
+        //Save editText's text when navigating away from fragment
+        editor.putString("data", edit.getText().toString()).commit();
     }
 
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString("asdasd", edit.getText().toString());
+        //Save editText text if for example rotating device
+        outState.putString("savedInstance", edit.getText().toString());
     }
 }
 

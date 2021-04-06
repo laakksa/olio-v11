@@ -1,20 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    
     <SwitchPreference
         android:key="switch"
-        android:title="Editable"/>
+        android:title="Editable"
+        android:defaultValue="true"/>
+
     <DropDownPreference android:key="fontsize"
         android:title="Font Size"
         android:entries="@array/font_sizes"
         android:entryValues="@array/font_size_values"
         app:useSimpleSummaryProvider="true"/>
+
     <DropDownPreference android:key="font_colour"
         android:title="Font colour"
         android:entries="@array/font_colours"
-        android:entryValues="@array/font_colour_values"/>
-   <CheckBoxPreference android:key="bold"
+        android:entryValues="@array/font_colour_values"
+        app:useSimpleSummaryProvider="true"/>
+
+    <DropDownPreference android:key="gravity"
+        android:title="Text alignment"
+        android:defaultValue="Left"
+        android:entries="@array/text_gravity"
+        android:entryValues="@array/text_gravity_values"
+        app:useSimpleSummaryProvider="true"/>
+
+    <CheckBoxPreference android:key="bold"
        android:title="Bold text"
        android:defaultValue="false"/>
+
+    <EditTextPreference android:key="displaytext"
+        android:title="Display Text"
+        app:defaultValue="@string/app_name"/>
+
+    <ListPreference android:key="language"
+        android:title="Language"
+        app:useSimpleSummaryProvider="true"
+        android:entries="@array/languages"
+        android:entryValues="@array/languages"/>
 
 </PreferenceScreen>

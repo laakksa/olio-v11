@@ -30,5 +30,19 @@
         <item>#FF99CC00</item>
         <item>#FF33B5E5</item>
     </string-array>
-
+    <string-array name="languages">
+        <item>Suomi</item>
+        <item>English</item>
+        <item>Svenska</item>
+    </string-array>
+    <string-array name="text_gravity">
+        <item>Left</item>
+        <item>Center</item>
+        <item>Right</item>
+    </string-array>
+    <string-array name="text_gravity_values">
+        <item>3</item>
+        <item>17</item>
+        <item>5</item>
+    </string-array>
 </resources>

@@ -18,29 +18,42 @@ import android.view.MenuItem;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity{
+
     private DrawerLayout drawer;
     private ActionBarDrawerToggle actionBarDrawerToggle;
-    private String text;
-    Bundle args;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //Initialize UI elements and SharedPreferences
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         drawer = findViewById(R.id.drawer_layout);
         SharedPreferences prefs = getSharedPreferences("settings", 0);
-        prefs.edit().putString("daatta", "").commit();
         NavigationView navigationView = findViewById(R.id.navigation_view);
+
+        //Default settings on app launch
+        prefs.edit().putString("displaytext", "Display Text").commit();
+        prefs.edit().putString("data", "").commit();
+        prefs.edit().putBoolean("switch", true).commit();
+        prefs.edit().putString("font_colour", "#FF000000").commit();
+        prefs.edit().putString("font_size", "27").commit();
+        prefs.edit().putString("gravity", "17").commit();
+        prefs.edit().putBoolean("bold", false).commit();
+        prefs.edit().putString("language", "English").commit();
+
+
+        //Navigation Drawer functionality
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 Fragment frag = null;
                 switch (item.getItemId()){
-                    case R.id.nav_second_fragment:
+                    case R.id.nav_settings:
                         frag = new SettingsFragment();
                         getSupportFragmentManager().beginTransaction().replace(R.id.nav_content, frag).commit();
                         item.setChecked(true);
@@ -51,10 +64,11 @@ public class MainActivity extends AppCompatActivity{
                         //item.setChecked(true);
                         frag  = getSupportFragmentManager().findFragmentByTag("HomeFragment");
                         if (frag != null) {
-                            navigationView.getMenu().getItem(1).setChecked(false);
-                            item.setChecked(true);
                             getSupportFragmentManager().beginTransaction().show(frag).commit();
                         }
+                        item.setChecked(true);
+                        navigationView.getMenu().getItem(1).setChecked(false);
+
                     default:
                         frag = new HomeFragment();
                         getSupportFragmentManager().beginTransaction().replace(R.id.nav_content, frag).commit();
@@ -63,6 +77,7 @@ public class MainActivity extends AppCompatActivity{
                 return false;
             }
         });
+
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawer, R.string.drawer_open,
                 R.string.drawer_close);
         drawer.addDrawerListener(actionBarDrawerToggle);

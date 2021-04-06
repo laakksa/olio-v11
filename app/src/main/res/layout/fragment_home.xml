@@ -8,9 +8,9 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="wrap_content"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:text="NOT EDITABLE"
+        android:background="@drawable/border"
         android:textSize="32sp"
         android:outlineProvider="bounds"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -21,7 +21,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="EDITABLE"
+        android:hint="insert text"
         android:id="@+id/editText"
         android:inputType="text"
         android:textSize="32sp"
