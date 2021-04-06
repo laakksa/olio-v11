@@ -43,7 +43,6 @@ public class HomeFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        final float scale = v.getContext().getResources().getDisplayMetrics().density;
         super.onViewCreated(view, savedInstanceState);
         edit = v.findViewById(R.id.editText);
         textView = v.findViewById(R.id.textView);
