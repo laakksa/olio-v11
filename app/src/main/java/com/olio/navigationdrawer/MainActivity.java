@@ -8,7 +8,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
+
 
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -60,8 +60,6 @@ public class MainActivity extends AppCompatActivity{
                         navigationView.getMenu().getItem(0).setChecked(false);
                         break;
                     case R.id.nav_home:
-                        //getSupportFragmentManager().beginTransaction().replace(R.id.nav_content, frag).commit();
-                        //item.setChecked(true);
                         frag  = getSupportFragmentManager().findFragmentByTag("HomeFragment");
                         if (frag != null) {
                             getSupportFragmentManager().beginTransaction().show(frag).commit();
